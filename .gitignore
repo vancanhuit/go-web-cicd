@@ -18,7 +18,9 @@
 !LICENSE
 
 !Makefile
-!.github/
+!Dockerfile
+!.github/workflows/*.yml
+!.editorconfig
 
 # ...even if they are in subdirectories
 !*/
