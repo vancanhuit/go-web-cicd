@@ -2,3 +2,14 @@ version: "2"
 
 run:
   timeout: "5m"
+
+linters:
+  enable:
+    - bodyclose
+    - noctx
+    - unparam
+    - contextcheck
+    - cyclop
+    - depguard
+    - errorlint
+    - errname

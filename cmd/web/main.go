@@ -20,6 +20,7 @@ func (app *application) loggerMiddleware(next http.Handler) http.Handler {
 
 func (app *application) helloHandler(w http.ResponseWriter, r *http.Request) {
 	w.Header().Add("Content-Type", "application/json")
+	//nolint:errcheck
 	json.NewEncoder(w).Encode(map[string]string{
 		"message": "Hello from Go!",
 	})
