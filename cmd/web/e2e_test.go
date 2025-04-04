@@ -28,7 +28,7 @@ func TestHelloAPI(t *testing.T) {
 	if err != nil {
 		t.Fatalf("GET /api/hello failed: %v", err)
 	}
-	defer res.Body.Close()
+	defer res.Body.Close() //nolint:errcheck
 
 	if res.StatusCode != http.StatusOK {
 		t.Errorf("want %d, got %d", http.StatusOK, res.StatusCode)
