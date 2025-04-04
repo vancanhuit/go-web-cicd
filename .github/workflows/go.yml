@@ -49,3 +49,11 @@ jobs:
 
     - name: Test
       run: go test -cover -v ./...
+
+    - name: Upload binary
+      uses: actions/upload-artifact@v4
+      with:
+        name: go-web-cicd
+        path: bin/web
+        compression-level: 0
+      if: ${{ success() }}
