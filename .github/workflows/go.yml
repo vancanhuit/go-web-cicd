@@ -16,7 +16,7 @@ env:
 
 jobs:
   golangci-lint:
-    runs-on: ubuntu-lastest
+    runs-on: ubuntu-latest
 
     steps:
       - name: Checkout
