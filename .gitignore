@@ -21,6 +21,7 @@
 !Dockerfile
 !.github/workflows/*.yml
 !.editorconfig
+!.golangci.yml
 
 # ...even if they are in subdirectories
 !*/
