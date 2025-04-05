@@ -15,7 +15,6 @@
 !go.mod
 
 !README.md
-!LICENSE
 
 !Makefile
 !Dockerfile
