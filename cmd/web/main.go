@@ -48,5 +48,6 @@ func main() {
 	err := server.ListenAndServe()
 	if err != nil {
 		app.Logger.Error("failed to start server", "error", err)
+		os.Exit(1)
 	}
 }

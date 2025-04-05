@@ -6,7 +6,6 @@ import (
 	"log/slog"
 	"net/http"
 	"net/http/httptest"
-	"os"
 	"testing"
 	"time"
 )
@@ -50,6 +49,5 @@ func TestHelloAPI(t *testing.T) {
 	got = body["message"]
 	if got != want {
 		t.Errorf("want %q, got %q", want, got)
-		os.Exit(1)
 	}
 }
