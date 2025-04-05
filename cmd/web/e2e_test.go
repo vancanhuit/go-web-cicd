@@ -43,7 +43,7 @@ func TestHelloAPI(t *testing.T) {
 	var body map[string]string
 	err = json.NewDecoder(res.Body).Decode(&body)
 	if err != nil {
-		t.Fatalf("Failed to decode JSON body: %q", err)
+		t.Fatalf("Failed to decode JSON body: %v", err)
 	}
 	want = "Hello from Go!"
 	got = body["message"]

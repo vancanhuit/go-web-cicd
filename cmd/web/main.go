@@ -2,6 +2,7 @@ package main
 
 import (
 	"encoding/json"
+	"flag"
 	"log/slog"
 	"net/http"
 	"os"
@@ -33,6 +34,11 @@ func (app *application) router() *http.ServeMux {
 }
 
 func main() {
+	var addr string
+
+	flag.StringVar(&addr, "addr", ":8080", "HTTP address")
+	flag.Parse()
+
 	app := &application{
 		Logger: slog.New(slog.NewJSONHandler(os.Stdout, &slog.HandlerOptions{
 			Level: slog.LevelInfo,
@@ -41,13 +47,13 @@ func main() {
 
 	server := &http.Server{
 		Handler: app.loggerMiddleware(app.router()),
-		Addr:    ":8080",
+		Addr:    addr,
 	}
 
 	app.Logger.Info("starting server", "addr", server.Addr)
 	err := server.ListenAndServe()
 	if err != nil {
-		app.Logger.Error("failed to start server", "error", err)
+		app.Logger.Error("failed to start server", "error", err.Error())
 		os.Exit(1)
 	}
 }
