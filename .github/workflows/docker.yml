@@ -33,11 +33,26 @@ jobs:
         username: ${{ github.repository_owner }}
         password: ${{ secrets.GITHUB_TOKEN }}
 
-    - name: Build Docker image
+    - name: Build and export Docker image
+      env:
+        IMAGE_NAME: ${{ env.REGISTRY }}/${{ github.repository }}:latest
       run: |
-        docker build -t ${{ env.REGISTRY }}/${{ github.repository }}:latest .
+        docker build -t ${IMAGE_NAME} .
+        if [[ "${GITHUB_EVENT_NAME}" == "pull_request" ]]; then
+          mkdir -pv export
+          docker image save --output=./export/image.tar
+        fi
 
-    - name: Push Docker image
+    - name: Upload Docker image tar archive
+      uses: actions/upload-artifact@v4
+      if: ${{ github.event_name == 'pull_request' }}
+      with:
+        name: go-web-cicd-docker
+        path: ./export/image.tar
+
+    - name: Push Docker image to GHCR
       if: ${{ github.event_name != 'pull_request' }}
+      env:
+        IMAGE_NAME: ${{ env.REGISTRY }}/${{ github.repository }}:latest
       run: |
-        docker push ${{ env.REGISTRY }}/${{ github.repository }}:latest
+        docker push ${IMAGE_NAME}
