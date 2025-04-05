@@ -26,13 +26,6 @@ jobs:
     - name: Set up Docker Buildx
       uses: docker/setup-buildx-action@v3
 
-    - name: Log in to GHCR
-      uses: docker/login-action@v3
-      with:
-        registry: ${{ env.REGISTRY }}
-        username: ${{ github.repository_owner }}
-        password: ${{ secrets.GITHUB_TOKEN }}
-
     - name: Build and export Docker image
       env:
         IMAGE_NAME: ${{ env.REGISTRY }}/${{ github.repository }}:latest
@@ -49,6 +42,14 @@ jobs:
       with:
         name: go-web-cicd-docker
         path: ./export/image.tar
+
+    - name: Log in to GHCR
+      uses: docker/login-action@v3
+      if: ${{ github.event_name != 'pull_request' }}
+      with:
+        registry: ${{ env.REGISTRY }}
+        username: ${{ github.repository_owner }}
+        password: ${{ secrets.GITHUB_TOKEN }}
 
     - name: Push Docker image to GHCR
       if: ${{ github.event_name != 'pull_request' }}
