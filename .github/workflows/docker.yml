@@ -40,7 +40,7 @@ jobs:
         docker build -t ${IMAGE_NAME} .
         if [[ "${GITHUB_EVENT_NAME}" == "pull_request" ]]; then
           mkdir -pv export
-          docker image save --output=./export/image.tar
+          docker image save --output=./export/image.tar ${IMAGE_NAME}
         fi
 
     - name: Upload Docker image tar archive
