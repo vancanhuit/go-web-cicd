@@ -6,6 +6,7 @@ import (
 	"log/slog"
 	"net/http"
 	"net/http/httptest"
+	"os"
 	"testing"
 	"time"
 )
@@ -43,11 +44,12 @@ func TestHelloAPI(t *testing.T) {
 	var body map[string]string
 	err = json.NewDecoder(res.Body).Decode(&body)
 	if err != nil {
-		t.Fatalf("failed to decode JSON body: %q", err)
+		t.Fatalf("Failed to decode JSON body: %q", err)
 	}
 	want = "Hello from Go!"
 	got = body["message"]
 	if got != want {
 		t.Errorf("want %q, got %q", want, got)
+		os.Exit(1)
 	}
 }
