@@ -13,7 +13,7 @@ type application struct {
 
 func (app *application) loggerMiddleware(next http.Handler) http.Handler {
 	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-		app.Logger.Info("Incoming request", "method", r.Method, "path", r.URL.Path)
+		app.Logger.Info("incoming request", "method", r.Method, "path", r.URL.Path)
 		next.ServeHTTP(w, r)
 	})
 }
