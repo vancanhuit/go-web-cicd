@@ -55,5 +55,5 @@ jobs:
       run: |
         gh release create ${GITHUB_REF_NAME} \
           --generate-notes \
-          --notes "`docker pull ${{ env.REGISTRY }}/${{ github.repository }}:${{ github.ref_name }}`" \
+          --notes "\`docker pull ${{ env.REGISTRY }}/${{ github.repository }}:${{ github.ref_name }}\`" \
           ./bin/go-web-cicd
