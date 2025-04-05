@@ -31,7 +31,7 @@ func TestHelloAPI(t *testing.T) {
 	defer res.Body.Close() //nolint:errcheck
 
 	if res.StatusCode != http.StatusOK {
-		t.Errorf("want %d, got %d", http.StatusOK, res.StatusCode)
+		t.Fatalf("want %d, got %d", http.StatusOK, res.StatusCode)
 	}
 
 	want := "application/json"
